@@ -30,11 +30,13 @@ public class BlogController {
     @Resource
     private IBlogService blogService;
 
+    //保存探店博文，并推送
     @PostMapping
     public Result saveBlog(@RequestBody Blog blog) {
         return blogService.saveBlog(blog);
     }
 
+    //点赞
     @PutMapping("/like/{id}")
     public Result likeBlog(@PathVariable("id") Long id) {
         // 修改点赞数量
