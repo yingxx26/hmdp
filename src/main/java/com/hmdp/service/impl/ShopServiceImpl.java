@@ -18,6 +18,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.domain.geo.GeoReference;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 
@@ -244,7 +245,10 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements IS
         });
         //根据id查询shop
         String join = StrUtil.join(",", ids);
-        List<Shop> shopList = lambdaQuery().in(Shop::getId, ids).last("order by field(id,"+join+")").list();
+        if(CollectionUtils.isEmpty(ids)){
+            return Result.ok(new ArrayList<Shop>() );
+        }
+        List<Shop> shopList = lambdaQuery().in(Shop::getId, ids)/*.last("order by field(id,"+join+")")*/.list();
         for (Shop shop : shopList) {
             shop.setDistance(distanceMap.get(shop.getId().toString()).getValue());
         }

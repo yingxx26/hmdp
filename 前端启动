@@ -1,2 +1,10 @@
+如果redis版本太低
+        redis：
+        cmd 进入E:\Redis7.41\Redis-7.4.1-Windows-x64-cygwin
+        # 启动命令
+        redis-server.exe redis.conf
+
+
+
 start nginx.exe
 127.0.0.1:8070

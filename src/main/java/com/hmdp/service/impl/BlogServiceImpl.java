@@ -112,7 +112,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
         //根据id查询用户
         List<UserDTO> userDTOS = userService.lambdaQuery()
                 .in(User::getId,userIds)
-                .last("order by field(id,"+join+")")
+                /*.last("order by field(id,"+join+")")*/
                 .list()
                 .stream().map(user ->
                 BeanUtil.copyProperties(user, UserDTO.class)
